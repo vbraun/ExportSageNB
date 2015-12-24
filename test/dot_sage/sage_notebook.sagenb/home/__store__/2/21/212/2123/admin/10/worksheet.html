@@ -1,0 +1,233 @@
+
+
+<h1 style="text-align: center;">The 24-Cell</h1>
+
+{{{id=4|
+cell24 = polytopes.twenty_four_cell()
+cell24.f_vector()   # it is self-dual
+///
+(1, 24, 96, 96, 24, 1)
+}}}
+
+{{{id=86|
+cell24.f_vector?
+///
+<html><!--notruncate-->
+
+<div class="docstring">
+    
+  <p><strong>File:</strong> /home/vbraun/Sage/sage/local/lib/python2.6/site-packages/sage/geometry/polyhedra.py</p>
+<p><strong>Type:</strong> &lt;type &#8216;instancemethod&#8217;&gt;</p>
+<p><strong>Definition:</strong> cell24.f_vector()</p>
+<p><strong>Docstring:</strong></p>
+<blockquote>
+<p>Return the f-vector.</p>
+<p>OUTPUT:</p>
+<p>Returns a vector whose <tt class="docutils literal"><span class="pre">i</span></tt>-th entry is the number of
+<tt class="docutils literal"><span class="pre">i</span></tt>-dimensional faces of the polytope.</p>
+<p>EXAMPLES:</p>
+<div class="highlight-python"><div class="highlight"><pre class="literal-block"><span class="gp">sage: </span><span class="n">p</span> <span class="o">=</span> <span class="n">Polyhedron</span><span class="p">(</span><span class="n">vertices</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
+<span class="gp">sage: </span><span class="n">p</span><span class="o">.</span><span class="n">f_vector</span><span class="p">()</span>
+<span class="go">(1, 7, 12, 7, 1)</span>
+</pre></div>
+</div>
+</blockquote>
+
+
+</div>
+</html>
+}}}
+
+<p>Here is a picture of the 24-cell projected into 3 dimensions:</p>
+
+{{{id=1|
+cell24.plot()
+///
+}}}
+
+<p><span style="font-weight: normal;"><span style="font-size: medium;">The "round" 24-cell can be $GL(4,\mathbb{Q})$-squished into a lattice polytope:</span></span></p>
+
+{{{id=13|
+cell24 = Polyhedron(vertices=[
+  (1,0,0,0),(0,1,0,0),(0,0,1,0),(0,0,0,1),(1,-1,-1,1),(0,0,-1,1),          
+  (0,-1,0,1),(-1,0,0,1),(1,0,0,-1),(0,1,0,-1),(0,0,1,-1),(-1,1,1,-1),
+  (1,-1,-1,0),(0,0,-1,0),(0,-1,0,0),(-1,0,0,0),(1,-1,0,0),(1,0,-1,0),
+  (0,1,1,-1),(-1,1,1,0),(-1,1,0,0),(-1,0,1,0),(0,-1,-1,1),(0,0,0,-1)])
+cell24.f_vector()
+///
+(1, 24, 96, 96, 24, 1)
+}}}
+
+{{{id=67|
+cell24.lattice_polytope().is_reflexive()
+///
+True
+}}}
+
+<h2>Symmetry groups</h2>
+<p>Here is the symmetry group of the 24-cell</p>
+
+{{{id=27|
+Aut = cell24.restricted_automorphism_group()
+Aut.cardinality()
+///
+1152
+}}}
+
+{{{id=34|
+Aut.gens()
+///
+[(3,9)(4,18)(7,13)(8,14)(10,20)(22,24), (2,3)(6,7)(10,11)(14,15)(17,18)(21,22), (2,4)(3,19)(5,18)(7,10)(8,21)(9,17)(12,22)(14,23)(15,24), (2,18)(3,17)(4,5)(8,23)(9,19)(12,24)(13,20)(14,21)(15,22), (2,19)(3,4)(5,17)(6,11)(8,22)(9,18)(12,21)(14,24)(15,23), (1,2,19,10,12,24,16,15,23,7,5,4)(3,18,20,9,21,11,14,22,13,8,17,6), (1,16)(2,21)(3,22)(4,8)(5,23)(9,24)(12,19)(14,18)(15,17)]
+}}}
+
+<p>Pick the following $G$-permutation action on the vertices of $\nabla$</p>
+
+{{{id=36|
+G = PermutationGroup([
+        '(1,14,22)(2,24,7)(3,18,16)(4,10,15)(5,21,11)(6,12,17)(8,19,13)(9,23,20)', 
+        '(1,10,16,7)(2,12,15,5)(3,9,14,8)(4,19,24,23)(6,20,11,13)(17,18,21,22)'])
+G.is_subgroup(Aut) and G.is_isomorphic( SL(2,3).as_matrix_group().as_permutation_group() )
+///
+True
+}}}
+
+{{{id=85|
+G.orbits()
+///
+[[1, 10, 14, 16, 15, 8, 22, 7, 3, 5, 4, 19, 17, 2, 9, 18, 21, 24, 13, 6, 12, 23, 11, 20]]
+}}}
+
+<p>Representatives for the 7 conjugacy classes:</p>
+
+{{{id=44|
+G.conjugacy_classes_representatives()
+///
+[(), (1,2,21,16,15,17)(3,19,10,14,23,7)(4,20,12,24,13,5)(6,8,22,11,9,18), (1,4,8,16,24,9)(2,6,23,15,11,19)(3,20,21,14,13,17)(5,7,22,12,10,18), (1,6,16,11)(2,14,15,3)(4,21,24,17)(5,8,12,9)(7,20,10,13)(18,23,22,19), (1,8,24)(2,23,11)(3,21,13)(4,16,9)(5,22,10)(6,15,19)(7,12,18)(14,17,20), (1,16)(2,15)(3,14)(4,24)(5,12)(6,11)(7,10)(8,9)(13,20)(17,21)(18,22)(19,23), (1,21,15)(2,16,17)(3,10,23)(4,12,13)(5,20,24)(6,22,9)(7,19,14)(8,11,18)]
+}}}
+
+<p>Here is the orbit of $1$ under the permutation $g_3$:</p>
+
+{{{id=52|
+(G.1).orbit(1)
+///
+[1, 14, 22]
+}}}
+
+<h1 style="text-align: center;">The 24-cell toric variety</h1>
+
+{{{id=45|
+fan = FaceFan(cell24.lattice_polytope())
+Pnabla = ToricVariety(FaceFan(cell24.lattice_polytope()),
+   coordinate_names='z1, z2, z3, z4, z5, z6, z7, z8, z9, z10, z11, z12, '+
+                    'z13, z14, z15, z16, z17, z18, z19, z20, z21, z22, z23, z24',
+   base_field=GF(101))
+Pnabla
+///
+4-d toric variety covered by 24 affine patches
+}}}
+
+{{{id=56|
+Pnabla.Chow_group().degree()
+///
+(Z, Z, C2 x C2 x Z^30, Z^20, Z)
+}}}
+
+{{{id=54|
+SR = Pnabla.Stanley_Reisner_ideal(); SR
+///
+Ideal (z2*z11, z4*z11, z5*z11, z6*z11, z8*z11, z11*z14, z11*z18, z11*z21, z11*z23, z1*z12, z4*z12, z5*z12, z6*z12, z7*z12, z12*z13, z12*z17, z12*z18, z12*z23, z1*z15, z2*z15, z4*z15, z6*z15, z10*z15, z15*z18, z15*z19, z15*z20, z15*z21, z1*z16, z2*z16, z3*z16, z4*z16, z5*z16, z9*z16, z16*z17, z16*z18, z16*z19, z1*z22, z2*z22, z5*z22, z6*z22, z9*z22, z10*z22, z13*z22, z14*z22, z18*z22, z1*z24, z2*z24, z3*z24, z4*z24, z5*z24, z6*z24, z7*z24, z8*z24, z20*z24, z3*z10, z4*z10, z5*z10, z7*z10, z8*z10, z10*z17, z10*z23, z1*z14, z3*z14, z4*z14, z7*z14, z14*z17, z14*z19, z14*z20, z1*z21, z3*z21, z5*z21, z7*z21, z9*z21, z13*z21, z17*z21, z4*z9, z6*z9, z7*z9, z8*z9, z9*z20, z9*z23, z5*z19, z6*z19, z7*z19, z8*z19, z13*z19, z19*z23, z2*z13, z3*z13, z4*z13, z8*z13, z13*z20, z1*z23, z2*z23, z3*z23, z20*z23, z2*z17, z6*z17, z8*z17, z17*z20, z3*z18, z7*z18, z8*z18, z18*z20, z3*z6, z2*z7, z1*z8, z5*z20, z7*z11*z16, z10*z11*z16, z11*z13*z16, z11*z16*z20, z3*z12*z15, z8*z12*z15, z9*z12*z15, z12*z14*z15, z17*z22*z24, z19*z22*z24, z21*z22*z24, z22*z23*z24, z6*z10*z16, z10*z13*z16, z10*z16*z20, z2*z12*z14, z8*z12*z14, z9*z12*z14, z18*z21*z24, z19*z21*z24, z21*z23*z24, z2*z9*z12, z3*z9*z12, z1*z10*z11, z10*z11*z13, z10*z11*z20, z17*z19*z24, z18*z19*z24, z6*z13*z16, z7*z13*z16, z5*z14*z15, z8*z14*z15, z9*z14*z15, z17*z23*z24, z18*z23*z24, z3*z9*z15, z5*z9*z15, z1*z11*z13, z7*z11*z13, z17*z18*z24, z2*z9*z14, z5*z9*z14, z1*z10*z13, z6*z10*z13, z2*z3*z8, z3*z5*z8, z3*z8*z12, z3*z8*z15, z4*z17*z22, z4*z19*z22, z4*z21*z22, z4*z22*z23, z1*z7*z20, z6*z7*z20, z7*z11*z20, z7*z16*z20, z2*z5*z8, z2*z8*z12, z2*z8*z14, z4*z18*z21, z4*z19*z21, z4*z21*z23, z1*z6*z20, z6*z10*z20, z6*z16*z20, z1*z10*z20, z1*z11*z20, z2*z3*z5, z2*z3*z9, z2*z3*z12, z4*z17*z19, z4*z18*z19, z4*z17*z23, z4*z18*z23, z5*z8*z14, z5*z8*z15, z1*z6*z7, z6*z7*z13, z6*z7*z16, z1*z7*z11, z1*z7*z13, z3*z5*z9, z3*z5*z15, z4*z17*z18, z1*z6*z10, z1*z6*z13, z2*z5*z9, z2*z5*z14, z19*z21*z22, z21*z22*z23, z17*z19*z22, z18*z19*z21, z17*z22*z23, z17*z18*z23, z18*z21*z23, z17*z18*z19) of Multivariate Polynomial Ring in z1, z2, z3, z4, z5, z6, z7, z8, z9, z10, z11, z12, z13, z14, z15, z16, z17, z18, z19, z20, z21, z22, z23, z24 over Rational Field
+}}}
+
+{{{id=55|
+Pnabla.inject_variables()
+z1*z16 in SR  and  z1*z14*z22 in SR
+///
+Defining z1, z2, z3, z4, z5, z6, z7, z8, z9, z10, z11, z12, z13, z14, z15, z16, z17, z18, z19, z20, z21, z22, z23, z24
+True
+}}}
+
+<h1 style="text-align: center;">The Calabi-Yau Hypersurface</h1>
+<p style="text-align: left;">The polynomial $P=P_0+P_\infty$ is</p>
+
+{{{id=57|
+anticanonical_bundle = -Pnabla.K()
+P = sum(anticanonical_bundle.sections_monomials())
+P([1]*24)    # g_3 and g_4^2-fixed point z_i=1
+///
+25
+}}}
+
+<p>One of the maximal cones is $\langle p_1,p_2,p_3,p_4,p_{19},p_{20}\rangle$:</p>
+
+{{{id=69|
+cone = fan.generating_cone(8)
+cone.ambient_ray_indices()
+///
+(0, 1, 2, 3, 18, 19)
+}}}
+
+<p>The singularity of $\mathbb{P}_\nabla$ is where the corresponding homogeneous variables vanish:</p>
+
+{{{id=63|
+P(0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1)
+///
+1
+}}}
+
+<h1 style="text-align: center;">Checking Transversality of the Equation</h1>
+<p><span style="font-weight: normal;"><span style="font-size: medium;">The patches are non-complete intersections: 9 equations in $\mathbb{C}^8$ cutting out a $4$-dimensional affine toric variety</span></span></p>
+
+{{{id=71|
+ambient_patch = Pnabla.affine_algebraic_patch(cone, names='x+')
+ambient_patch
+///
+Closed subscheme of Affine Space of dimension 8 over Finite Field of size 101 defined by:
+  -x1*x4 + x0*x7,
+  -x1*x5 + x0*x6,
+  -x4*x6 + x5*x7,
+  x0*x4 - x3*x5,
+  -x2*x4 + x3*x7,
+  -x1*x4 + x3*x6,
+  x0*x2 - x1*x3,
+  x2*x6 - x1*x7,
+  -x1*x4 + x2*x5
+}}}
+
+<p>Of course there is a singularity at $0\in \mathbb{C}^8$:</p>
+
+{{{id=76|
+ambient_patch.is_smooth()
+///
+False
+}}}
+
+<p>Now we throw in the equation $P=0$ and go to the same patch again:</p>
+
+{{{id=70|
+Xtilde = Pnabla.subscheme(P)
+patch = Xtilde.affine_algebraic_patch(cone, names='x+')
+patch
+///
+Closed subscheme of Affine Space of dimension 8 over Finite Field of size 101 defined by:
+  -x1*x4 + x0*x7,
+  -x1*x5 + x0*x6,
+  -x4*x6 + x5*x7,
+  x0*x4 - x3*x5,
+  -x2*x4 + x3*x7,
+  -x1*x4 + x3*x6,
+  x0*x2 - x1*x3,
+  x2*x6 - x1*x7,
+  -x1*x4 + x2*x5,
+  x2^2*x5^2 + x0*x2*x5 + x2^2*x5 + x2*x3*x5 + x2*x4*x5 + x2*x5^2 + x0*x2*x6 + x2*x5*x6 + x2*x5*x7 + x0*x2 + x0*x4 + x2*x4 + x1*x5 + x2*x5 + x2*x6 + x5*x7 + x0 + x1 + x2 + x3 + x4 + x5 + x6 + x7 + 1
+}}}
+
+{{{id=73|
+patch.is_smooth()
+///
+True
+}}}
+
+{{{id=81|
+
+///
+}}}
