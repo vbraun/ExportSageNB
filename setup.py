@@ -18,5 +18,5 @@ setup(
         ],
     },
     version='1.0',
-    url='https://github.com/sagemath/sagenb-export',
+    url='https://github.com/vbraun/ExportSageNB',
 )

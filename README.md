@@ -8,7 +8,11 @@ particular IPython/Jupyter notebooks.
 Install
 -------
 
-    pip install 
+    pip install git+https://github.com/vbraun/ExportSageNB.git
+
+or
+
+    sage -pip install git+https://github.com/vbraun/ExportSageNB.git
 
 
 Usage
