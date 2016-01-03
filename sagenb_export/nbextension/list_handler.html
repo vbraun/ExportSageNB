@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <title>SageNB Export</title>
+        <link rel="stylesheet" href="/sagenb/www/sagenb-export.css"/>
+    </head>
+    <body>
+
+        <h1>SageNB Exporter</h1>
+
+        <div class="warn">
+            <p>
+                <b>Note:</b>
+                The Sage notebook changed.
+            </p>
+            <a href="/">Take me to the new Sage/Jupyter notebook</a>
+        </div>
+
+        <div class="old">
+            <p>
+                To launch the old notebook instead, run
+            </p>
+            <pre>sage --notebook=sagenb</pre>
+            <p>
+                on the command line. Or click on one of your old
+                notebooks below to convert it to a new Sage/Jupyter
+                notebook.
+            </p>
+        </div>
+
+        <div class="nb-list">
+            <div class="nb-row nb-header">
+                <div class="nb-id">ID</div>
+                <div class="nb-name">Name</div>
+            </div>
+            {% for nb in notebooks %}
+            <div class="nb-row clickable">
+                <div class="nb-id"><span class="ellipsis">{{ nb.unique_id }}</span></div>
+                <div class="nb-name"><span class="ellipsis">{{ nb.name }}</span></div>
+            </div>
+            {% endfor %}
+        </div>
+        
+    </body>
+</html>
+

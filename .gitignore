@@ -5,3 +5,4 @@
 /.tox
 MANIFEST
 
+/sagenb_export.egg-info/

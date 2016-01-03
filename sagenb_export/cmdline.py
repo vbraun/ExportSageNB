@@ -7,9 +7,11 @@ import os
 import sys
 import argparse
 
+from sagenb_export.defaults import DOT_SAGE
 from sagenb_export.logger import log
 from sagenb_export.sagenb_reader import NotebookSageNB
 from sagenb_export.actions import action_list, action_print, action_convert_ipynb
+
 
 description = \
 """
@@ -21,7 +23,7 @@ def make_parser():
     parser = argparse.ArgumentParser(description=description)
     parser.add_argument('--log', dest='log', default=None,
                         help='one of [DEBUG, INFO, ERROR, WARNING, CRITICAL]')
-    parser.add_argument('--dot-sage', dest='dot_sage', default='~/.sage',
+    parser.add_argument('--dot-sage', dest='dot_sage', default=DOT_SAGE,
                         help='location of the .sage directory')
     parser.add_argument('--list', dest='list', action='store_true',
                         help='list all SageNB notebooks')
