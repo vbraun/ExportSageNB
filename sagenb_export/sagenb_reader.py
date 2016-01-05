@@ -4,7 +4,7 @@ import re
 import cPickle
 
 from sagenb_export.logger import log
-
+from sagenb_export.unescape import unescape
 
 
 CELL_FRONT = re.compile(u'^\{\{\{id=(?P<index>[0-9]*)\|$')
@@ -91,7 +91,7 @@ class WorksheetParser(object):
         while not (self.is_cell_mid or self.is_finished):
             log.debug('Read cell input: %s', self.line)
             accumulator.append(self.get_line_and_forward())
-        return u'\n'.join(accumulator).strip()
+        return unescape(u'\n'.join(accumulator).strip())
 
     def _read_cell_output(self):
         assert self.is_cell_mid
@@ -100,7 +100,7 @@ class WorksheetParser(object):
         while not (self.is_cell_back or self.is_finished):
             log.debug('Read cell output: %s', self.line)
             accumulator.append(self.get_line_and_forward())
-        return u'\n'.join(accumulator).strip()
+        return unescape(u'\n'.join(accumulator).strip())
 
     def _read_cell(self):
         input = self._read_cell_input()

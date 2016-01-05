@@ -43,8 +43,5 @@ class TestNotebookSageNB(unittest.TestCase):
         self.assertEqual(type(cell[0].input), unicode)
         self.assertEqual(type(cell[1].input), unicode)
         self.assertEqual(type(cell[1].output), unicode)
-        #print(cell[0].input.decode('ascii'))
-        #print(cell[1].input.decode('ascii'))
-        #print(cell[1].output.decode('ascii'))
         ipynb = IpynbWriter(notebook)
         ipynb.write('/dev/null')
