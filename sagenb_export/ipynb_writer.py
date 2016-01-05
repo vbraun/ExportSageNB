@@ -23,11 +23,8 @@ class IpynbWriter(object):
     def cells(self):
         for cell in self.nb.cells:
             if isinstance(cell, TextCell):
-                yield new_raw_cell(
-                    cell.input,
-                    metadata=dict(
-                        format='text/html'
-                    ),
+                yield new_markdown_cell(
+                    source=cell.input,
                 )
             elif isinstance(cell, ComputeCell):
                 yield new_code_cell(
