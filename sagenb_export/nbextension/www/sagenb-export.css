@@ -57,6 +57,12 @@ p {
     text-align: center;
 }
 
+.error {
+    background-color: #7f0000;
+    color: #ccffcc;
+    padding: 0 2em;
+}
+
 .old {
     padding: 0 3em;
     margin-top: 2em;

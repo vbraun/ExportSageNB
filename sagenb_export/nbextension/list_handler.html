@@ -1,7 +1,8 @@
 <html>
     <head>
-        <title>SageNB Export</title>
+        <title>SageMath</title>
         <link rel="stylesheet" href="/sagenb/www/sagenb-export.css"/>
+        <script type="text/javascript" src="/sagenb/www/sagenb-export.js"></script>
     </head>
     <body>
         
@@ -35,13 +36,16 @@
             </p>
         </div>
 
+        <div class="error">
+        </div>
+        
         <div class="nb-list">
             <div class="nb-row nb-header">
                 <div class="nb-id">ID</div>
                 <div class="nb-name">Name</div>
             </div>
             {% for nb in notebooks %}
-            <div class="nb-row clickable">
+            <div class="nb-row clickable" onclick="exportSageNB('{{nb.unique_id}}')">
                 <div class="nb-id"><span class="ellipsis">{{ nb.unique_id }}</span></div>
                 <div class="nb-name"><span class="ellipsis">{{ nb.name }}</span></div>
             </div>
