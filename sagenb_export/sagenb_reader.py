@@ -7,9 +7,9 @@ from sagenb_export.logger import log
 
 
 
-CELL_FRONT = re.compile('^\{\{\{id=(?P<index>[0-9]*)\|$')
-CELL_MID = re.compile('^///$')
-CELL_BACK = re.compile('^\}\}\}$')
+CELL_FRONT = re.compile(u'^\{\{\{id=(?P<index>[0-9]*)\|$')
+CELL_MID = re.compile(u'^///$')
+CELL_BACK = re.compile(u'^\}\}\}$')
 
 
 
@@ -80,7 +80,7 @@ class WorksheetParser(object):
         while not (self.is_cell_front or self.is_finished):
             log.debug('Read text: %s', self.line)
             accumulator.append(self.get_line_and_forward())
-        accumulator = '\n'.join(accumulator).strip()
+        accumulator = u'\n'.join(accumulator).strip()
         if accumulator:
             return TextCell(accumulator)
 
@@ -91,7 +91,7 @@ class WorksheetParser(object):
         while not (self.is_cell_mid or self.is_finished):
             log.debug('Read cell input: %s', self.line)
             accumulator.append(self.get_line_and_forward())
-        return '\n'.join(accumulator).strip()
+        return u'\n'.join(accumulator).strip()
 
     def _read_cell_output(self):
         assert self.is_cell_mid
@@ -100,7 +100,7 @@ class WorksheetParser(object):
         while not (self.is_cell_back or self.is_finished):
             log.debug('Read cell output: %s', self.line)
             accumulator.append(self.get_line_and_forward())
-        return '\n'.join(accumulator).strip()
+        return u'\n'.join(accumulator).strip()
 
     def _read_cell(self):
         input = self._read_cell_input()
@@ -124,8 +124,8 @@ class NotebookSageNB(object):
     def __init__(self, path):
         log.debug('opening notebook root directory: %s', path)
         self.path = path
-        with open(os.path.join(path, 'worksheet.html'), 'r') as f:
-            self.ws = f.read()
+        with open(os.path.join(path, 'worksheet.html'), 'rb') as f:
+            self.ws = f.read().decode('utf-8')
         with open(os.path.join(path, 'worksheet_conf.pickle')) as f:
             self.conf = cPickle.load(f)
 
