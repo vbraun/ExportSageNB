@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     name='sagenb_export',
@@ -11,7 +11,8 @@ setup(
         'ipython>=4',
         'nbconvert>=4',
     ],
-    packages=['sagenb_export'],
+    packages=find_packages(),
+    include_package_data=True,
     entry_points={
         'console_scripts': [
             'sagenb-export = sagenb_export.cmdline:main',
