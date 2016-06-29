@@ -6,7 +6,7 @@ from sagenb_export.sagenb_reader import NotebookSageNB
 
 def action_list(dot_sage):
     def tr(unique_id, name):
-        print('{0:<15} | {1}'.format(unique_id, name))
+        print(u'{0:<15} | {1}'.format(unique_id, name))
     tr('Unique ID', 'Notebook Name')
     print('-' * 79)
     notebooks = dict(

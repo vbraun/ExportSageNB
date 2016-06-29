@@ -3,16 +3,16 @@ from sagenb_export.logger import log
 from sagenb_export.sagenb_reader import TextCell, ComputeCell
 
 
-HEADER = """
+HEADER = u"""
 Name: {nb.name}
 """
 
-TEXT_CELL = """
+TEXT_CELL = u"""
 Text: {cell.input}
 """
 
 
-COMPUTE_CELL = """
+COMPUTE_CELL = u"""
 In[{cell.index}]: {cell.input}
 Out[{cell.index}]: {cell.output}
 """
