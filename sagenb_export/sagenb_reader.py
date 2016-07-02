@@ -82,7 +82,7 @@ class WorksheetParser(object):
             accumulator.append(self.get_line_and_forward())
         accumulator = u'\n'.join(accumulator).strip()
         if accumulator:
-            return TextCell(accumulator)
+            return TextCell(unescape(accumulator))
 
     def _read_cell_input(self):
         assert self.is_cell_front
@@ -152,7 +152,10 @@ class NotebookSageNB(object):
     @property
     def sort_key(self):
         return (self.conf['owner'], self.conf['id_number'])
-            
+
+    def __lt__(lhs, rhs):
+        return lhs.sort_key < rhs.sort_key
+    
     @property
     def unique_id(self):
         return '{0}:{1}'.format(self.conf['owner'], self.conf['id_number'])
