@@ -48,3 +48,10 @@ Notes
   html but shown as their html source code. If you export to HTML
   (File -> Download as -> HTML) they are rendered as html, though.
 
+
+Testing and Python Compatibility
+--------------------------------
+
+* The git-trac command supports Python 2.7, and 3.4+.
+* Most recent [Travis CI](https://travis-ci.org/vbraun/ExportSageNB) test:
+  [![Build Status](https://travis-ci.org/vbraun/ExportSageNB.svg?branch=master)](https://travis-ci.org/vbraun/ExportSageNB)
