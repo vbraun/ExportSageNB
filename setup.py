@@ -19,6 +19,6 @@ setup(
             'sagenb-export = sagenb_export.cmdline:main',
         ],
     },
-    version='1.0',
+    version='2.0',
     url='https://github.com/vbraun/ExportSageNB',
 )
