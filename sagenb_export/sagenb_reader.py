@@ -25,7 +25,7 @@ class Cell(object):
         self.input = input
 
     def __repr__(self):
-        return '{0}:"{1}"'.format(type(self), self.input)
+        return '{0}:"{1}"'.format(type(self), self.input.encode('utf-8', 'replace'))
 
 class ComputeCell(Cell):
 
@@ -136,7 +136,7 @@ class NotebookSageNB(object):
             self.conf = pickle.load(f)
 
     def __repr__(self):
-        return '{0}:"{1}"'.format(self.unique_id, self.name)
+        return '{0}:"{1}"'.format(self.unique_id, self.name.encode('utf-8', 'replace'))
             
     @classmethod
     def all_iter(cls, dot_sage):

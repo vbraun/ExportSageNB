@@ -6,7 +6,6 @@ from sagenb_export.sagenb_reader import (
     NotebookSageNB,
     TextCell, ComputeCell,
 )
-from sagenb_export.ipynb_writer import IpynbWriter
 
 
 if six.PY2:
@@ -40,7 +39,6 @@ class ReadSageNB(unittest.TestCase):
             'cell24 = polytopes.twenty_four_cell()\ncell24.f_vector()   # it is self-dual')
         self.assertEqual(cell[1].output, '(1, 24, 96, 96, 24, 1)')
 
-
     def test_sage_4(self):
         notebook = NotebookSageNB.find(DOT_SAGE, '_sage_:4')
         self.assertEqual(notebook.unique_id, '_sage_:4')
@@ -50,8 +48,6 @@ class ReadSageNB(unittest.TestCase):
         self.assertEqual(type(cell[0].input), string_type)
         self.assertEqual(type(cell[1].input), string_type)
         self.assertEqual(type(cell[1].output), string_type)
-        ipynb = IpynbWriter(notebook)
-        ipynb.write('/dev/null')
 
     def test_admin_4(self):
         notebook = NotebookSageNB.find(DOT_SAGE, 'admin:4')
