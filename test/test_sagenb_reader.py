@@ -1,6 +1,7 @@
 
 import os
 import unittest
+import six
 from sagenb_export.sagenb_reader import (
     NotebookSageNB,
     TextCell, ComputeCell,
@@ -8,7 +9,14 @@ from sagenb_export.sagenb_reader import (
 from sagenb_export.ipynb_writer import IpynbWriter
 
 
+if six.PY2:
+    string_type = unicode
+else:
+    string_type = str
+
+    
 DOT_SAGE = os.path.join(os.path.dirname(__file__), 'dot_sage')
+
 
 class ReadSageNB(unittest.TestCase):
     """
@@ -39,9 +47,9 @@ class ReadSageNB(unittest.TestCase):
         self.assertEqual(notebook.name, 'Welcome to the Sage Tutorial! -- Sage Tutorial v6.4.rc1')
         cell = list(notebook.cells)
         self.assertEqual(len(cell), 2)
-        self.assertEqual(type(cell[0].input), unicode)
-        self.assertEqual(type(cell[1].input), unicode)
-        self.assertEqual(type(cell[1].output), unicode)
+        self.assertEqual(type(cell[0].input), string_type)
+        self.assertEqual(type(cell[1].input), string_type)
+        self.assertEqual(type(cell[1].output), string_type)
         ipynb = IpynbWriter(notebook)
         ipynb.write('/dev/null')
 

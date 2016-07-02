@@ -1,7 +1,13 @@
 
 import os
 import re
-import cPickle
+
+try:
+    # Python 2
+    import cPickle as pickle
+except ImportError:
+    # Python 3
+    import pickle
 
 from sagenb_export.logger import log
 from sagenb_export.unescape import unescape
@@ -126,8 +132,8 @@ class NotebookSageNB(object):
         self.path = path
         with open(os.path.join(path, 'worksheet.html'), 'rb') as f:
             self.ws = f.read().decode('utf-8')
-        with open(os.path.join(path, 'worksheet_conf.pickle')) as f:
-            self.conf = cPickle.load(f)
+        with open(os.path.join(path, 'worksheet_conf.pickle'), 'rb') as f:
+            self.conf = pickle.load(f)
 
     def __repr__(self):
         return '{0}:"{1}"'.format(self.unique_id, self.name)
