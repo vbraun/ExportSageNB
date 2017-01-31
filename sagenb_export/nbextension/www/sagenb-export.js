@@ -1,5 +1,12 @@
 'use strict';
 
+
+function getCookie(name) {
+    var r = document.cookie.match("\\b" + name + "=([^;]*)\\b");
+    return r ? r[1] : undefined;
+}
+
+
 var exportSageNB = function(uniqueId) {
     console.log('Converting ' + uniqueId);
     var xhttp = new XMLHttpRequest();
@@ -11,5 +18,6 @@ var exportSageNB = function(uniqueId) {
         }
     };
     xhttp.open('POST', '/sagenb/export', true);
+    xhttp.setRequestHeader('X-Xsrftoken', getCookie("_xsrf"));
     xhttp.send(uniqueId);
 };
