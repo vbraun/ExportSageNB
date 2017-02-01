@@ -21,6 +21,10 @@ class ListSageNBHandler(IPythonHandler):
             for notebook in NotebookSageNB.all_iter(dot_sage)
         )
         for key in sorted(notebooks.keys()):
+            # Skip notebooks with owner _sage_ which come from live
+            # documentation and are not real notebooks
+            if key[0] == "_sage_":
+                continue
             yield notebooks[key]
     
     def get(self):
