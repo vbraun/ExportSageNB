@@ -27,16 +27,18 @@ class IpynbWriter(object):
                     source=cell.input,
                 )
             elif isinstance(cell, ComputeCell):
+                # SageNB's counting starts at 0 but IPython starts at 1
+                count = cell.index + 1
                 yield new_code_cell(
                     source=cell.input,
-                    execution_count=cell.index,
+                    execution_count=count,
                     outputs=[
                         new_output(
                             output_type=u'execute_result',
                             data={
                                 'text/plain': cell.output,
                             },
-                            execution_count=cell.index,
+                            execution_count=count,
                         )
                     ]
                 )
