@@ -12,12 +12,14 @@ var exportSageNB = function(uniqueId) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
-            document.location = 'http://' + document.location.host + xhttp.responseText;
+            var url = 'http://' + document.location.host + xhttp.responseText;
+            var win = window.open(url, '_blank');
+            win.focus();
         } else {
             document.querySelector('.error').innerText = xhttp.responseText;
         }
     };
-    xhttp.open('POST', '/sagenb/export', true);
+    xhttp.open('POST', '/sagenb/export', false);
     xhttp.setRequestHeader('X-Xsrftoken', getCookie("_xsrf"));
     xhttp.send(uniqueId);
 };
