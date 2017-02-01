@@ -32,14 +32,13 @@ p {
 }
 
 .header h1 {
-    flex: 8 1 0;
     margin: auto;
 }
 
 .header img {
-    flex: 2 0 0;
     margin: auto;
     height: 64px;
+    width: 64px;
 }
 
 .warn {
