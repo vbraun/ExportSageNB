@@ -38,6 +38,14 @@ class ReadSageNB(unittest.TestCase):
             cell[1].input,
             'cell24 = polytopes.twenty_four_cell()\ncell24.f_vector()   # it is self-dual')
         self.assertEqual(cell[1].output, '(1, 24, 96, 96, 24, 1)')
+        self.assertEqual(cell[1].plain_text_output(), '(1, 24, 96, 96, 24, 1)')
+        # Third cell (containing HTML)
+        self.assertIsInstance(cell[2], ComputeCell)
+        self.assertEqual(cell[2].index, 86)
+        self.assertEqual(
+            cell[2].input, 'cell24.f_vector?')
+        self.assertIn('<html><!--notruncate-->\n\n<div class="docstring">', cell[2].output)
+        self.assertEqual(cell[2].plain_text_output(), '')
 
     def test_sage_4(self):
         notebook = NotebookSageNB.find(DOT_SAGE, '_sage_:4')
@@ -65,4 +73,4 @@ class ReadSageNB(unittest.TestCase):
         self.assertEqual(cell1.index, 1)
         self.assertEqual(cell1.input, '')
         self.assertEqual(cell1.output, '')
-        
+        self.assertEqual(cell1.plain_text_output(), '')
