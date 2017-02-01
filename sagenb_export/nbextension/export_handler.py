@@ -1,5 +1,6 @@
 import os
 import string
+from itertools import count
 
 from notebook.base.handlers import IPythonHandler
  
@@ -54,8 +55,7 @@ class ExportSageNBHandler(IPythonHandler):
         filename = '{0}.ipynb'.format(basename)
         if not os.path.exists(filename):
             return filename
-        i = 2
-        while True:
+        for i in count(2):
             filename = '{0} ({1}).ipynb'.format(basename, i)
             if not os.path.exists(filename):
                 return filename
