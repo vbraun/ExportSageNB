@@ -36,7 +36,7 @@ class IpynbWriter(object):
                         new_output(
                             output_type=u'execute_result',
                             data={
-                                'text/plain': cell.output,
+                                'text/plain': cell.plain_text_output(),
                             },
                             execution_count=count,
                         )

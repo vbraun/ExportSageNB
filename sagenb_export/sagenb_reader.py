@@ -34,7 +34,36 @@ class ComputeCell(Cell):
         super(ComputeCell, self).__init__(input)
         self.index = index
         self.output = output
-    
+
+    def plain_text_output(self):
+        """
+        Return the cell output without <html>...</html> blocks.
+
+        The Sage notebook has a peculiar feature where everything in
+        the output which is wrapped in <html>...</html> is rendered as
+        HTML. This is for example used for interacts.
+
+        These HTML blocks are most likely meaningless for IPython.
+        """
+        # Code below based on the parse_html() function from
+        # sagenb/notebook/cell.py
+        s = self.output
+        t = ''
+        while len(s) > 0:
+            i = s.find('<html>')
+            if i == -1:
+                t += s
+                break
+            j = s.find('</html>')
+            if j == -1:
+                t += s[:i]
+                break
+            t += s[:i]
+            s = s[j + 7:]
+        t = t.replace('</html>', '')
+        return t
+
+
 
 class TextCell(Cell):
     pass
