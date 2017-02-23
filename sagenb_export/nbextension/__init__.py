@@ -1,13 +1,9 @@
-
-from tornado.web import StaticFileHandler
-
 from notebook.utils import url_path_join
 
 from sagenb_export.nbextension.list_handler import ListSageNBHandler
 from sagenb_export.nbextension.export_handler import ExportSageNBHandler
 from sagenb_export.nbextension.asset_handler import AssetHandler
-
-
+from sagenb_export.nbextension.start_sagenb_handler import StartSageNBHandler
 
 
 def load_jupyter_server_extension(nb_server_app):
@@ -25,6 +21,7 @@ def load_jupyter_server_extension(nb_server_app):
         host_pattern, [
             (url(r'/sagenb'), ListSageNBHandler),
             (url(r'/sagenb/export'), ExportSageNBHandler),
+            (url(r'/sagenb/start'), StartSageNBHandler),
             (url(r'/sagenb/www/(.*)'), AssetHandler),
         ]
     )
