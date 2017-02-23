@@ -1,6 +1,6 @@
+exclude .*
 include README* LICENSE*
-recursive-include sagenb_export *.py
-recursive-include sagenb_export/nbextension *.html
-recursive-include sagenb_export/nbextension/www *
+recursive-include sagenb_export *.py *.css *.html *.js *.svg
 recursive-exclude sagenb_export /#*.py .\#*.py *~
 recursive-exclude test *
+exclude tox.ini
