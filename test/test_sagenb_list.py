@@ -15,8 +15,8 @@ class ListSageNB(unittest.TestCase):
 
     def test_list(self):
         nbks = list(NotebookSageNB.all_iter(DOT_SAGE))
-        self.assertEqual(len(nbks), 4)
-        sage_4, admin_4, admin_10, aleks = sorted(nbks)
+        self.assertEqual(len(nbks), 5)
+        sage_4, admin_4, admin_6, admin_10, aleks = sorted(nbks)
         self.assertEqual(sage_4.unique_id, '_sage_:4')
         self.assertEqual(sage_4.name, u'Welcome to the Sage Tutorial! -- Sage Tutorial v6.4.rc1')
         self.assertEqual(admin_4.unique_id, 'admin:4')
