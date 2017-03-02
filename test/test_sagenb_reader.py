@@ -37,6 +37,7 @@ class ReadSageNB(unittest.TestCase):
         self.assertEqual(
             cell[1].input,
             'cell24 = polytopes.twenty_four_cell()\ncell24.f_vector()   # it is self-dual')
+        self.assertEqual(cell[1].input, cell[1].ipython_input())
         self.assertEqual(cell[1].output, '(1, 24, 96, 96, 24, 1)')
         self.assertEqual(cell[1].plain_text_output(), '(1, 24, 96, 96, 24, 1)')
         # Third cell (containing HTML)
@@ -44,6 +45,7 @@ class ReadSageNB(unittest.TestCase):
         self.assertEqual(cell[2].index, 86)
         self.assertEqual(
             cell[2].input, 'cell24.f_vector?')
+        self.assertEqual(cell[2].input, cell[2].ipython_input())
         self.assertIn('<html><!--notruncate-->\n\n<div class="docstring">', cell[2].output)
         self.assertEqual(cell[2].plain_text_output(), '')
 
@@ -74,3 +76,15 @@ class ReadSageNB(unittest.TestCase):
         self.assertEqual(cell1.input, '')
         self.assertEqual(cell1.output, '')
         self.assertEqual(cell1.plain_text_output(), '')
+
+    def test_admin_6(self):
+        notebook = NotebookSageNB.find(DOT_SAGE, 'admin:6')
+        self.assertEqual(notebook.unique_id, 'admin:6')
+        self.assertEqual(notebook.name, 'Test %cython')
+        cell_list = list(notebook.cells)
+        self.assertEqual(len(cell_list), 2)
+        # First cell
+        cell0 = cell_list[0]
+        self.assertIsInstance(cell0, ComputeCell)
+        self.assertEqual(cell0.input, '%hide\n%cython\ncdef str x = "Hello World"\nprint(x)')
+        self.assertEqual(cell0.ipython_input(), '%%cython\ncdef str x = "Hello World"\nprint(x)')

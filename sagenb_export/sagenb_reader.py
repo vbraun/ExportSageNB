@@ -35,6 +35,34 @@ class ComputeCell(Cell):
         self.index = index
         self.output = output
 
+    def ipython_input(self):
+        """
+        Convert SageNB input to IPython input.
+
+        This converts % to %% cell magics and removes some cell magics
+        which have no meaning in IPython.
+        """
+        # SageNB allows multiple % lines, but IPython doesn't. Still,
+        # in order to preserve as much as possible the meaning of the
+        # input, we convert all magics.
+        # Some magics like %hide which have no meaning in IPython are
+        # simply removed.
+        lines = iter(self.input.splitlines(True))
+        res = ""
+        for line in lines:
+            if not line.startswith('%'):
+                res += line
+                break
+            line = line.strip()
+            if line in ['%auto', '%hide', '%hideall', '%save_server']:
+                # Remove this directive
+                pass
+            else:
+                res += "%" + line + "\n"
+        for line in lines:
+            res += line
+        return res
+
     def plain_text_output(self):
         """
         Return the cell output without <html>...</html> blocks.

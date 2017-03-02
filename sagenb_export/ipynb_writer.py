@@ -30,7 +30,7 @@ class IpynbWriter(object):
                 # SageNB's counting starts at 0 but IPython starts at 1
                 count = cell.index + 1
                 yield new_code_cell(
-                    source=cell.input,
+                    source=cell.ipython_input(),
                     execution_count=count,
                     outputs=[
                         new_output(
