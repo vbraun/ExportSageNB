@@ -1,0 +1,2 @@
+cdef str x = "Hello World"
+print(x)
