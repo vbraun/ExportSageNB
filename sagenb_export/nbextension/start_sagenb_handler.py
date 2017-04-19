@@ -2,6 +2,7 @@ import os
 import sys
 from subprocess import Popen
 
+from tornado.web import authenticated
 from notebook.base.handlers import IPythonHandler
 
 from sagenb_export.nbextension.jinja2_env import jinja2_env
@@ -12,6 +13,7 @@ class StartSageNBHandler(IPythonHandler):
     Start the old Sage Notebook server and send its URL.
     """
 
+    @authenticated
     def get(self):
         self.set_header("Content-Type", "text/plain")
         try:

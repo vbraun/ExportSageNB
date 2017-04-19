@@ -2,6 +2,7 @@ import os
 import string
 from itertools import count
 
+from tornado.web import authenticated
 from notebook.base.handlers import IPythonHandler
  
 from sagenb_export.defaults import DOT_SAGE
@@ -31,7 +32,7 @@ class ExportSageNBHandler(IPythonHandler):
     def dot_sage(self):
         return os.path.expanduser(DOT_SAGE)
         
-    
+    @authenticated
     def post(self):
         print('POST', self.request, self.request.body)
         ipynb_filename = self.safe_filename()

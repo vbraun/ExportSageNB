@@ -1,5 +1,6 @@
 import os
 
+from tornado.web import authenticated
 from notebook.base.handlers import IPythonHandler
  
 from sagenb_export.defaults import DOT_SAGE
@@ -27,11 +28,10 @@ class ListSageNBHandler(IPythonHandler):
                 continue
             yield notebooks[key]
     
+    @authenticated
     def get(self):
         template = jinja2_env.get_template('list_handler.html')
         html = template.render(dict(
             notebooks=tuple(self.notebook_iter()),
         ))
         self.finish(html)
-
-
