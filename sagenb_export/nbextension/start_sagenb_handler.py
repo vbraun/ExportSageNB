@@ -34,7 +34,7 @@ class StartSageNBHandler(IPythonHandler):
         # (passed as $0) is written to the write end of the pipe and
         # that both ends of the pipe are then closed.
         env = dict(os.environ)
-        env["SAGE_BROWSER"] = "bash -c 'echo >&{1} $0; exec {0}<&- {1}>&-'".format(rfd, wfd)
+        env["BROWSER"] = "bash -c 'echo >&{1} $0; exec {0}<&- {1}>&-'".format(rfd, wfd)
 
         # Actually start the Sage notebook
         cmd = "from sagenb.notebook.notebook_object import notebook; notebook()"
