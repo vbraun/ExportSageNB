@@ -11,6 +11,7 @@ setup(
         'six',
         'ipython>=4',
         'nbconvert>=4',
+        'notebook',
     ],
     packages=find_packages(),
     include_package_data=True,
@@ -19,6 +20,6 @@ setup(
             'sagenb-export = sagenb_export.cmdline:main',
         ],
     },
-    version='3.2',
+    version='3.3',
     url='https://github.com/vbraun/ExportSageNB',
 )
