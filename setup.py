@@ -8,7 +8,6 @@ setup(
     author='Volker Braun',
     author_email='vbraun.name@gmail.com',
     install_requires=[
-        'six',
         'ipython>=4',
         'nbconvert>=4',
         'notebook',

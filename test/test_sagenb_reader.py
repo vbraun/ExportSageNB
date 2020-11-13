@@ -1,17 +1,16 @@
 
 import os
 import unittest
-import six
 from sagenb_export.sagenb_reader import (
     NotebookSageNB,
     TextCell, ComputeCell,
 )
 
 
-if six.PY2:
-    string_type = unicode
-else:
-    string_type = str
+try:
+    string_type = unicode  # py2
+except NameError:
+    string_type = str  # py3
 
     
 DOT_SAGE = os.path.join(os.path.dirname(__file__), 'dot_sage')
